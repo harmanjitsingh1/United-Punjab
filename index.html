@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>United Punjab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-[#1C1C1A] text-white font-['Times_New_Roman']">
+    <!-- Navbar -->
+    <header class="bg-[#1C1C1A] border-b border-[#F57517] fixed w-full z-40">
+      <div
+        class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4"
+      >
+        <!-- <h1 class="text-2xl font-bold text-yellow-500">United Punjab</h1> -->
+        <a href="/">
+          <img src="logo 2.png" alt="logo" class="h-10" />
+        </a>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex space-x-6">
+          <a href="#about" class="hover:text-[#F57517]">About</a>
+          <a href="#services" class="hover:text-[#F57517]">Services</a>
+          <a href="#community" class="hover:text-[#F57517]">Community</a>
+          <a href="#youth" class="hover:text-[#F57517]">Youth</a>
+          <a href="#scholarships" class="hover:text-[#F57517]">Scholarships</a>
+          <a href="#business" class="hover:text-[#F57517]">Business</a>
+          <a href="#events" class="hover:text-[#F57517]">Events</a>
+        </nav>
+
+        <!-- Mobile Hamburger -->
+        <button
+          id="menu-btn"
+          class="md:hidden text-[#F57517] focus:outline-none"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <!-- Sidebar (Mobile) -->
+    <div
+      id="sidebar"
+      class="fixed top-0 right-0 h-full w-64 bg-[#2A2A28] border-l border-yellow-600 transform translate-x-full transition-transform duration-300 z-50"
+    >
+      <div class="p-6 space-y-6">
+        <button id="close-btn" class="text-[#F57517] text-2xl">✕</button>
+        <a href="#about" class="block hover:text-[#F57517]">About</a>
+        <a href="#services" class="block hover:text-[#F57517]">Services</a>
+        <a href="#community" class="block hover:text-[#F57517]">Community</a>
+        <a href="#youth" class="block hover:text-[#F57517]">Youth</a>
+        <a href="#scholarships" class="block hover:text-[#F57517]"
+          >Scholarships</a
+        >
+        <a href="#business" class="block hover:text-[#F57517]">Business</a>
+        <a href="#events" class="block hover:text-[#F57517]">Events</a>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <section
+      class="relative bg-gradient-to-r from-[#2A2A28] via-[#1C1C1A] to-[#2A2A28] text-center pt-28 pb-14"
+    >
+      <h2
+        class="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#F57517] to-[#ff8c42] bg-clip-text text-transparent transition-all duration-300"
+      >
+        Empowering Punjabis Worldwide
+      </h2>
+
+      <p class="mt-6 text-lg max-w-2xl mx-auto mb-8">
+        A Social Initiative to fight Drugs, Unemployment & Migration while
+        empowering Youth, Women & Global Punjabi Community.
+      </p>
+      <a
+        class="bg-[#F57517] text-white font-semibold px-6 py-4 rounded-lg shadow-lg hover:scale-105 transition-transform"
+        href="Login.html"
+      >
+        Get Started
+      </a>
+    </section>
+
+    <!-- Sections -->
+    <section id="about" class="max-w-6xl mx-auto px-6 py-16">
+      <p class="text-lg text-center leading-relaxed text-gray-200">
+        United Punjab is a dedicated initiative aimed at addressing the key
+        challenges faced by Punjab. Through impactful awareness campaigns,
+        strong branding, and a powerful online presence, we strive to shed light
+        on critical issues and inspire collective action.
+      </p>
+    </section>
+
+    <section id="services" class="max-w-6xl mx-auto px-6 py-16">
+      <h3 class="text-3xl font-bold text-[#F57517] mb-4">Services Showcase</h3>
+      <ul class="grid md:grid-cols-2 gap-6">
+        <li
+          class="bg-[#2A2A28] p-6 rounded-xl cursor-pointer hover:scale-105 hover:text-[#F57517] transition-transform"
+        >
+          Web Development
+        </li>
+        <li
+          class="bg-[#2A2A28] p-6 rounded-xl cursor-pointer hover:scale-105 hover:text-[#F57517] transition-transform"
+        >
+          Digital Marketing
+        </li>
+        <li
+          class="bg-[#2A2A28] p-6 rounded-xl cursor-pointer hover:scale-105 hover:text-[#F57517] transition-transform"
+        >
+          Brand Management
+        </li>
+        <li
+          class="bg-[#2A2A28] p-6 rounded-xl cursor-pointer hover:scale-105 hover:text-[#F57517] transition-transform"
+        >
+          Cybersecurity
+        </li>
+        <li
+          class="bg-[#2A2A28] p-6 rounded-xl cursor-pointer hover:scale-105 hover:text-[#F57517] transition-transform"
+        >
+          Online Classes
+        </li>
+      </ul>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold text-center text-[#F57517] mb-12">
+        What We Do
+      </h2>
+
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Community -->
+        <div
+          class="bg-[#2A2A28] rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition"
+        >
+          <div class="flex justify-center mb-4">
+            <i class="lucide-users text-[#F57517] text-5xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Community Engagement</h3>
+          <p>
+            Connect Punjabis worldwide with our directory, helpline, and
+            exclusive member benefits.
+          </p>
+        </div>
+
+        <!-- Youth -->
+        <div
+          class="bg-[#2A2A28] rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition"
+        >
+          <div class="flex justify-center mb-4">
+            <i class="lucide-graduation-cap text-[#F57517] text-5xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Youth Opportunities</h3>
+          <p>
+            Creating 25,000+ IT & ITES jobs through training, career portals,
+            and registrations.
+          </p>
+        </div>
+
+        <!-- Scholarships -->
+        <div
+          class="bg-[#2A2A28] rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition"
+        >
+          <div class="flex justify-center mb-4">
+            <i class="lucide-book-open text-[#F57517] text-5xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Scholarships & Welfare</h3>
+          <p>
+            Supporting 1,000+ students with scholarships, women’s health
+            programs, and welfare initiatives.
+          </p>
+        </div>
+
+        <!-- Business -->
+        <div
+          class="bg-[#2A2A28] rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition"
+        >
+          <div class="flex justify-center mb-4">
+            <i class="lucide-briefcase text-[#F57517] text-5xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Business & Trade</h3>
+          <p>
+            Promoting 200+ Punjabi products, B2B trade connections, and digital
+            product catalogs.
+          </p>
+        </div>
+
+        <!-- Events -->
+        <div
+          class="bg-[#2A2A28] rounded-2xl shadow-md p-6 text-center hover:shadow-xl transition"
+        >
+          <div class="flex justify-center mb-4">
+            <i class="lucide-calendar-days text-[#F57517] text-5xl"></i>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Events & Updates</h3>
+          <p>
+            Organizing exhibitions, delegations, and promoting sports like
+            Hockey, Kabaddi, and Football.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-[#1C1C1A] border-t border-[#F57517] text-center md:text-left py-10 text-gray-300"
+    >
+      <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- About -->
+        <div>
+          <h3 class="text-lg font-semibold text-[#F57517] mb-4">
+            United Punjab
+          </h3>
+          <p class="text-sm leading-relaxed">
+            A Social Initiative to fight Drugs, Unemployment & Migration while
+            empowering Youth, Women & the Global Punjabi Community.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-lg font-semibold text-[#F57517] mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="#" class="hover:text-[#F57517] transition">Home</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-[#F57517] transition">About Us</a>
+            </li>
+            <li>
+              <a href="#" class="hover:text-[#F57517] transition"
+                >Initiatives</a
+              >
+            </li>
+            <li>
+              <a href="#" class="hover:text-[#F57517] transition">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h3 class="text-lg font-semibold text-[#F57517] mb-4">Contact</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              Email:
+              <a
+                href="mailto:info@unitedpunjab.org"
+                class="hover:text-[#F57517]"
+                >info@unitedpunjab.org</a
+              >
+            </li>
+            <li>Phone: +91 98765 43210</li>
+            <li>Address: Chandigarh, Punjab</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom copyright -->
+      <div
+        class="mt-8 border-t text-center border-gray-700 pt-4 text-sm text-gray-400"
+      >
+        <p>&copy; 2025 United Punjab. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const sidebar = document.getElementById("sidebar");
+      const closeBtn = document.getElementById("close-btn");
+
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.remove("translate-x-full");
+      });
+      closeBtn.addEventListener("click", () => {
+        sidebar.classList.add("translate-x-full");
+      });
+    </script>
+  </body>
+</html>
