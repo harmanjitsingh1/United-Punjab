@@ -1,0 +1,177 @@
+{
+  "brandName": "United Punjab",
+  "brandDes": "A social initiative to create career and business opportunities for youth, and make Punjab drug-free.",
+  "tagLine": "Uniting Punjabis across the Globe",
+  "welcome": "Welcome to United Punjab",
+  "whatWeDo": "What We Do",
+  "goHome": "Go Home",
+  "pageNotFound": "Page Not Found",
+  "404Message": "Oops! The page you are looking for does not exist.",
+  "email": "Email",
+  "phone": "Phone",
+  "address": "Address",
+  "addressValue": "Mohali, Punjab",
+  "copyRight": "United Punjab. All Rights Reserved.",
+  "quickLinks": "Quick Links",
+  "haveAccount": "Already have an account?",
+  "dontHaveAccount": "Don’t have an account?",
+
+  "inputs": {
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "password": "Password",
+    "message": "Your Message",
+    "otp": "Enter OTP",
+    "enterOtp": "Enter 6-digit OTP",
+    "enterName": "Enter your full name",
+    "enterEmail": "Enter your email",
+    "enterPhone": "Enter your phone (optional)",
+    "enterPassword": "Enter your password",
+    "confirmPassword": "Confirm your password",
+    "enterQuery": "Enter your Query",
+    "enterMessage": "Type your message here"
+  },
+  
+  "verifyOtp": "Verify OTP",
+  "didntReceiveOtp": "Didn’t receive the OTP?",
+  "resendOtp": "Resend",
+  "errors": {
+    "otpRequired": "OTP is required.",
+    "otpInvalid": "OTP must be a 6-digit code."
+  },
+  
+  "nav": {
+    "home": "Home",
+    "login": "Login",
+    "signup": "Signup",
+    "contact": "Contact",
+    "aboutUs": "About Us",
+    "services": "Services",
+    "youth": "Youth",
+    "scholarships": "Scholarships",
+    "business": "Business",
+    "initiatives": "Initiatives",
+    "events": "Events",
+    "membership": "Membership",
+    "sportsClub": "Sports Club",
+    "gurmukhi": "Gurmukhi"
+  },
+
+  "homeSection": {
+    "title": "Together for a Better Punjab",
+    "paragraphs": {
+      "0": "Let's all unite and create a Punjab story for all of the world to hear."
+    },
+    "cards": {
+      "challengeTitle": "Facing Challenges",
+      "challengeText": "Punjab is struggling with unemployment, drugs, and crime, pushing youth to leave for better opportunities abroad.",
+      "unityTitle": "Power of Unity",
+      "unityText": "The need of the hour is to unite beyond selfish interests and create opportunities, or risk Punjab becoming only a place we visit.",
+      "visionTitle": "A Great Vision",
+      "visionText": "If Japan rose after devastation, why can’t Punjab? We have resources, an international airport, and real estate ready for growth."
+    },
+    "ctaTitle": "Our Mission",
+    "ctaText": "Let’s pledge to make Punjab prosperous again by creating career opportunities. If Hyderabad and Pune can be IT hubs, why not Mohali?"
+  },
+
+  "about": {
+    "title": "About Us",
+    "intro": "United Punjab is a social initiative by IndusOne, Tech IndusOne Services LLP — a premier IT startup dedicated to building world-class tech talent and empowering Punjabi youth with opportunities across the globe.",
+    "mission": {
+      "title": "Our Mission",
+      "text": "We aim to nurture and empower local talent by creating an environment of continuous learning, mentorship, and career opportunities. Through AI, Machine Learning, hackathons, and skill-based training, we bridge the gap between learning and employment."
+    },
+    "presence": {
+      "title": "Global Presence",
+      "text": "Headquartered in Mohali, Punjab, we also have a business development team in San Jose, California. New offices in Singapore and Dubai are launching by early 2026 to expand global outreach."
+    },
+    "stats": {
+      "opportunities": "Career Opportunities",
+      "offices": "Global Offices",
+      "youth": "Youth Trained & Mentored"
+    }
+  },
+
+  "scholarships": {
+    "title": "Scholarships and Grants",
+    "subtitle": "Empowering students and women with opportunities, education, and support for a brighter Punjab.",
+    "stats": {
+      "0": "Deserving students will be provided full expense scholarships every year at school, college, and university level.",
+      "1": "Students will receive access to educational aids.",
+      "2": "EWS (Economically Weaker Sections) girls/women will get free access to sanitary pads."
+    },
+    "pledgeTitle": "Our Pledge",
+    "pledgeText": "We have pledged to make Punjab drugs and unemployment free and to make it the most prosperous state in India. We need your support and blessings.",
+    "supportButton": "Support the Mission"
+  },
+
+  "services": {
+    "title": "Premium Services Offered",
+    "intro": "We want the Community to provide us an opportunity to serve your business interests in the below-mentioned domains and also to let us know if more services are required. All the services will be delivered through our trusted business partners, with IndusOne ensuring the highest standards of business excellence.",
+    "list": {
+      "web": "Web Development",
+      "digital": "Digital Marketing",
+      "brand": "Brand Management",
+      "logo": "Logo Designing / Creation",
+      "cyber": "Cyber Security Trainings / Consultancy",
+      "coding": "Online Coding Language Classes"
+    }
+  },
+
+  "sports": {
+    "title": "Sports Clubs & Academy",
+    "subtitle": "Promoting sports culture across Punjab with dedicated clubs and academies.",
+    "clubs": {
+      "football": "United Punjab FC",
+      "hockey": "United Punjab Hockey Club",
+      "kabaddi": "United Punjab Kabaddi Club"
+    }
+  },
+
+  "business": {
+    "title": "Our Business Initiative",
+    "brand": "Eternal",
+    "description": {
+      "part1": "We will also be launching under License a Premium Dastaar/Dupatta Brand",
+      "part2": "to help with raising funds for training and hiring local youth and also to help every individual support the cause since we are targeting a very large number of unemployed youth."
+    },
+    "details": "Eternal is not just a brand, it’s a movement — combining tradition with empowerment, supporting our youth and preserving cultural identity.",
+    "cta": "Learn More",
+    "bfc": {
+      "title": "Business Promotion Centers",
+      "centersTitle": "Global Centers",
+      "centers": "We propose to establish Business Facilitation Centers (BFCs) globally, starting with Dubai, followed by New York, London, Toronto, Vancouver, Chicago, San Francisco, Adelaide and more. These centers will facilitate trade and tourism with host nations.",
+      "tradeTitle": "Trade & Delegations",
+      "trade": "200+ items from Punjab will be marketed and promoted through exhibitions, trade fairs, and delegations. A strong Punjab–Dubai Business Promotion Group will connect businesses globally.",
+      "careerTitle": "Career & Training",
+      "career": "Premium customized services will be launched as soon as trained manpower is ready, creating more career opportunities and youth training programs."
+    }
+  },
+
+  "initiatives": {
+    "title": "Global Initiatives",
+    "airlines": {
+      "title": "Global Airlines Partnership",
+      "description": "IndusOne is in talks with Air India and other airlines for the most economical seats (up to ₹25,000/year) for our esteemed subscribers. In case of emergencies, priority access will be provided to connect travellers with their motherland without hindrance."
+    },
+    "helpline": {
+      "title": "Global Helpline",
+      "description": "Launching a Toll-free Global helpline for anyone in distress, ensuring support and assistance worldwide."
+    },
+    "directory": {
+      "title": "Global Mapping & Directory",
+      "description": "United Punjab will map all major Gurdwaras globally and create a Global Punjabi directory where every proud Punjabi can get listed, irrespective of religion, caste, or creed."
+    },
+    "business": {
+      "title": "Business Roundtable",
+      "description": "Soon, a United Punjab Business Roundtable will be set up to identify 200+ products from Punjab for global exports, aiming for a target of ₹100Cr/year."
+    }
+  },
+
+  "contactUs": {
+    "title": "Contact Us",
+    "subtitle": "We’d love to hear from you. Please fill out the form below.",
+    "sendButton": "Send Message"
+  }
+}
