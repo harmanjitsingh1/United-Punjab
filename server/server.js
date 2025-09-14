@@ -30,10 +30,9 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
 };
-
 app.use(cors(corsOptions));
 
-app.options("*", cors(corsOptions));
+// app.options("/api/v1/*", cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("Backend is running....");
