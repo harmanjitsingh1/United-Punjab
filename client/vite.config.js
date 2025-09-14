@@ -13,7 +13,7 @@ export default defineConfig({
   },
   server: {
     cors: {
-      origin: "https://united-punjab-mine.onrender.com", // Allow all origins (use specific origins in production)
+      origin: "*", // Allow all origins (use specific origins in production)
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
     },
