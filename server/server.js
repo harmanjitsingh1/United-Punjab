@@ -10,10 +10,6 @@ connectToDB();
 
 const app = express();
 
-app.use(cors(corsOptions));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 const allowedOrigins = [
   "http://localhost:5173",
   "https://united-punjab-mine.vercel.app",
@@ -35,8 +31,9 @@ const corsOptions = {
   credentials: true,
 };
 
-
-
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1", userRoute);
 
 app.get("/", (req, res) => {
