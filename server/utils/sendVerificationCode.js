@@ -44,7 +44,7 @@ export const sendVerificationCode = async (emailTo, OTP) => {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent:", info.messageId);
+    return;
   } catch (err) {
     console.error("Error sending verification code:", err);
     throw err;

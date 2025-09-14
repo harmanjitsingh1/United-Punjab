@@ -13,14 +13,14 @@ function Footer() {
           <h3 className="text-lg font-semibold text-primary mb-4">
             {t("brandName")}
           </h3>
-          <p className="text-sm leading-relaxed">
-            {t("brandDes")}
-          </p>
+          <p className="text-sm leading-relaxed">{t("brandDes")}</p>
         </div>
 
         {/* <!-- Quick Links --> */}
         <div>
-          <h3 className="text-lg font-semibold text-primary mb-4">{t("quickLinks")}</h3>
+          <h3 className="text-lg font-semibold text-primary mb-4">
+            {t("quickLinks")}
+          </h3>
           <ul className="space-y-2 text-sm">
             <li>
               <Link to={"/"} className="hover:text-primary transition">
@@ -47,20 +47,26 @@ function Footer() {
 
         {/* <!-- Contact --> */}
         <div>
-          <h3 className="text-lg font-semibold text-primary mb-4">{t("nav.contact")}</h3>
+          <h3 className="text-lg font-semibold text-primary mb-4">
+            {t("nav.contact")}
+          </h3>
           <ul className="space-y-2 text-sm">
             <li>
               {t("email")}: &nbsp;
-              <Link
-                to="mai{lo}:info@unitedpunjab.org"
-                className="hover:text-primary"
-                >
-                info@unitedpunjab.org
-              </Link>
+              <a
+                href="mailto:unitedpunjab2026@outlook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                unitedpunjab2026@outlook.com
+              </a>
             </li>
-                
-            <li>{t("phone")}: &nbsp; +91 98765 43210</li>
-            <li>{t("address")}: &nbsp; {t("addressValue")}</li>
+            <li>
+              <a href="tel:+919876464310">{t("phone")}: +91 98764 64310</a>
+            </li>
+            <li>
+              {t("address")}: &nbsp; {t("addressValue")}
+            </li>
           </ul>
         </div>
       </div>

@@ -17,6 +17,9 @@ import InitiativesPage from "./Pages/InitiativesPage";
 import Header from "./Components/Header";
 import { Toaster } from "react-hot-toast";
 import OtpVerification from "./Pages/OtpVerification";
+import GurmukhiSeriesPage from "./Pages/GurmukhiSeriesPage";
+import UserFormWizard from "./Pages/Temp";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +31,7 @@ const router = createBrowserRouter([
       { path: "contact", element: <ContactUsPage /> },
       { path: "scholarships", element: <ScholarshipsPage /> },
       { path: "sports-club", element: <SportsClubPage /> },
+      { path: "gurmukhi", element: <GurmukhiSeriesPage /> },
       { path: "business", element: <BusinessPage /> },
       { path: "initiatives", element: <InitiativesPage /> },
       {
@@ -43,12 +47,16 @@ const router = createBrowserRouter([
           { path: "coding-classes", element: <NotFound /> },
         ],
       },
-      { path: "*", element: <NotFound /> },
     ],
   },
   { path: "/login", element: <LoginPage /> },
   { path: "/signup", element: <SignupPage /> },
-  { path: "/verify-otp", element: <OtpVerification /> },
+  {
+    path: "/verify-otp",
+    element: <OtpVerification />,
+  },
+  { path: "*", element: <NotFound /> },
+  // { path: "/temp", element: <UserFormWizard /> },
 ]);
 
 function App() {

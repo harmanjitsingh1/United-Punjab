@@ -12,7 +12,7 @@ router.post("/login", userLogin);
 
 router.post("/signup", userSignup);
 
-router.post("/verify", userVerification);
+router.post("/verify-otp", userVerification);
 
 router.post("/resend-otp", resendOTP);
 

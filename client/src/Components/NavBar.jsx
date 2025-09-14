@@ -6,7 +6,7 @@ export const getNavItems = (t) => [
   { label: t("nav.home"), href: "/" },
   { label: t("nav.aboutUs"), href: "/about" },
   { label: t("nav.services"), href: "/services" },
-  { label: t("nav.membership"), href: "/membership" },
+  // { label: t("nav.membership"), href: "/membership" },
   { label: t("nav.initiatives"), href: "/initiatives" },
   // { label: t("nav.youth"), href: "/youth" },
   { label: t("nav.scholarships"), href: "/scholarships" },

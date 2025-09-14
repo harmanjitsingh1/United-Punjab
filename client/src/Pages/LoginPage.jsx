@@ -2,19 +2,20 @@ import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { loginUserThunk } from "@/store/user.thunk";
-import { House } from "lucide-react";
+import { House, Loader2Icon } from "lucide-react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function LoginPage() {
   const state = useSelector((state) => state.userReducer);
-  console.log(state);
+  // console.log(state);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -109,7 +110,7 @@ function LoginPage() {
   const isFormValid =
     formData.email && formData.password && !errors.email && !errors.password;
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     Object.entries(formData).forEach(([name, value]) =>
@@ -121,7 +122,10 @@ function LoginPage() {
     if (hasErrors) return;
 
     // dispatch login thunk
-    dispatch(loginUserThunk(formData));
+    const data = await dispatch(loginUserThunk(formData));
+    if (data?.payload?.success){
+      navigate("/")
+    }
   };
 
   return (

@@ -6,11 +6,13 @@ import Sidebar from "./SideBar";
 import { Button } from "./ui/button";
 import { CircleUserRound } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { useSelector } from "react-redux";
 
 function Header() {
   const { t } = useTranslation();
 
-  const isAuth = false;
+  const state = useSelector((state)=>state.userReducer)
+  console.log(state.isAuthorized);
 
   return (
     <>
@@ -35,7 +37,7 @@ function Header() {
               <ThemeToggle />
             </div>
 
-            {isAuth ? (
+            {state.isAuthorized ? (
               <Link to={"/dashboard"} className="rounded-full cursor-pointer">
                 {/* Icon should also adapt to theme */}
                 <CircleUserRound

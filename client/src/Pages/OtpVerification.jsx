@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { House } from "lucide-react";
+import { House, Loader2Icon } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { resendOtpThunk, verifyOtpThunk } from "@/store/user.thunk";
 
 import {
   InputOTP,
@@ -10,16 +12,17 @@ import {
   InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
-import { useDispatch } from "react-redux";
-import { verifyOtpThunk } from "@/store/user.thunk";
+import toast from "react-hot-toast";
 
 export default function OtpVerification() {
+  const state = useSelector((state) => state.userReducer);
   const { t } = useTranslation();
   const [verificationCode, setVerificationCode] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!verificationCode.trim()) {
       setError(t("errors.otpRequired") || "OTP is required.");
@@ -31,11 +34,25 @@ export default function OtpVerification() {
     setError("");
 
     // 🔥 Call API to verify OTP here
-    
-    console.log("Verifying OTP:", verificationCode);
 
-    dispatch(verifyOtpThunk({ email: "harman@gmail.com", verificationCode }));
+    const userId = state.userProfile._id;
+
+    const data = await dispatch(verifyOtpThunk({ userId, verificationCode }));
+    console.log(data);
+    if (data?.payload?.success) {
+      navigate("/");
+    }
   };
+
+  const handleResendOtp = () => {
+    const userId = state?.userProfile?._id;
+    if (!userId) {
+      toast.error("Failed to resend OTP.");
+      return;
+    }
+    dispatch(resendOtpThunk({ userId }));
+  };
+
   const otpSlotClass =
     "bg-input text-2xl font-medium border-2 border-border w-12 h-14 flex items-center justify-center";
 
@@ -123,15 +140,19 @@ export default function OtpVerification() {
           {/* Verify Button */}
           <Button
             type="submit"
-            disabled={verificationCode.length !== 6}
+            disabled={verificationCode.length !== 6 || state.buttonLoading}
             className={`text-lg w-full py-6 rounded-lg font-semibold transition-transform shadow-lg cursor-pointer
               ${
-                verificationCode.length === 6
+                verificationCode.length === 6 || state.buttonLoading
                   ? "bg-gradient-to-r from-[#F57517] to-orange-500 text-white hover:scale-105"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
           >
-            {t("verifyOtp") || "Verify OTP"}
+            {state.buttonLoading ? (
+              <Loader2Icon className={"animate-spin"} />
+            ) : (
+              t("verifyOtp") || "Verify OTP"
+            )}
           </Button>
 
           {/* Resend link */}
@@ -139,7 +160,7 @@ export default function OtpVerification() {
             {t("didntReceiveOtp") || "Didn’t receive the OTP?"} &nbsp;
             <button
               type="button"
-              onClick={() => console.log("Resend OTP")}
+              onClick={handleResendOtp}
               className="text-primary hover:underline font-medium"
             >
               {t("resendOtp") || "Resend"}

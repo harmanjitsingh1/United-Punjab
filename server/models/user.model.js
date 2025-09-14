@@ -9,11 +9,33 @@ const userSchema = new mongoose.Schema(
       minlength: 3,
       maxlength: 50
     },
+    phone: {
+      type: String,
+      required: true,
+      unique: true,
+      validate: {
+        validator: (value) => /^[0-9]{10}$/.test(value),
+        message: "Phone number should be 10 digits long.",
+      },
+    },
     email: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
+      validate: {
+        validator: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        message: "Please enter a valid email address.",
+      },
+    },
+    aadhar: {
+      type: String,
+      required: true,
+      unique: true,
+      validate: {
+        validator: (value) => /^[0-9]{12}$/.test(value),
+        message: "Aadhar number should be 12 digits long.",
+      },
     },
     password: {
       type: String,
