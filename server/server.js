@@ -27,12 +27,11 @@ const corsOptions = {
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "Authorization", "content-type", "contenttype"], // ✅ extra added
   credentials: true,
 };
-app.use(cors(corsOptions));
 
-// app.options("/api/v1/*", cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("Backend is running....");
