@@ -14,13 +14,18 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   // origin: process.env.CORS_ORIGIN,
-  origin: ["http://localhost:5173", "http://192.168.1.5:5173"],
+  origin: ["united-punjab-mine.vercel.app"],
+  methods: ["GET", "POST"], 
   credentials: true,
 }));
+
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (req, res)=>{
+  res.send("Backend is running....")
+})
 app.use("/api/v1", userRoute);
 
-app.listen(PORT, ()=>{
+app.listen(PORT || 5000, ()=>{
   console.log(`Server listening at port ${PORT}`);
 })
