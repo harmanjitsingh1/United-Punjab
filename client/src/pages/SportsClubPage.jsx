@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Volleyball, Trophy, BicepsFlexed } from "lucide-react";
-import { Card } from "@/Components/ui/card";
+import { Card } from "@/components/ui/card";
 
 export default function SportsClubPage() {
   const { t } = useTranslation();

@@ -1,11 +1,11 @@
 // src/Layout.jsx
 import { Outlet } from "react-router-dom";
 // import { AppSidebar } from "@/components/AppSideBar"; // your sidebar component
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-import ScrollToTop from "./Components/ScrollToTop";
-import NavBar from "./Components/NavBar";
+import ScrollToTop from "./components/ScrollToTop";
+import NavBar from "./components/NavBar";
 
 export default function Layout() {
   return (

@@ -1,10 +1,10 @@
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { House, Loader2Icon } from "lucide-react";
-import { Label } from "@/Components/ui/label";
-import { Input } from "@/Components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { signupUserThunk } from "@/store/user.thunk";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -277,9 +277,9 @@ function SignupPage() {
 
 export default SignupPage;
 
-// import { Button } from "@/Components/ui/button";
-// import { Input } from "@/Components/ui/input";
-// import { Label } from "@/Components/ui/label";
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { Label } from "@/components/ui/label";
 // import { House, Loader2 } from "lucide-react";
 // import { useState } from "react";
 // import { Link, useNavigate } from "react-router-dom";

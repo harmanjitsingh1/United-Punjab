@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Building2, Globe2, Users } from "lucide-react";
-import { Card, CardHeader } from "@/Components/ui/card";
+import { Card, CardHeader } from "@/components/ui/card";
 
 export default function BusinessPage() {
   const { t } = useTranslation();

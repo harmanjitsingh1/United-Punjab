@@ -17,10 +17,10 @@ import OtpVerification from "./pages/OtpVerification.jsx";
 import GurmukhiSeriesPage from "./pages/GurmukhiSeriesPage.jsx";
 import UserFormWizard from "./pages/Temp.jsx";
 
-import Services from "./Components/Services.jsx";
-import Header from "./Components/Header.jsx";
-import LanguageSwitcher from "./Components/LanguageSwitcher.jsx";
-import ProtectedRoute from "./Components/ProtectedRoute.jsx";
+import Services from "./components/Services.jsx";
+import Header from "./components/Header.jsx";
+import LanguageSwitcher from "./components/LanguageSwitcher.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 import { Toaster } from "react-hot-toast";
 

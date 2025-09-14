@@ -1,7 +1,7 @@
-import HeroSection from "@/Components/HeroSection";
+import HeroSection from "@/components/HeroSection";
 import { useTranslation } from "react-i18next";
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 function HomePage() {
   const { t, i18n } = useTranslation();

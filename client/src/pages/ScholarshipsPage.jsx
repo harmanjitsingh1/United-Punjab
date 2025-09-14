@@ -1,4 +1,4 @@
-import { Card, CardContent, CardTitle } from "@/Components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { useTranslation } from "react-i18next";
 
 export default function ScholarshipsPage() {
