@@ -33,10 +33,12 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.use("/api/v1", userRoute);
+
 app.get("/", (req, res) => {
   res.send("Backend is running....");
 });
-app.use("/api/v1", userRoute);
+
 
 app.listen(PORT || 5000, () => {
   console.log(`Server listening at port ${PORT}`);
