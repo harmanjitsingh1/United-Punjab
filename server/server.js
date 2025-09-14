@@ -6,10 +6,11 @@ import userRoute from "./routes/user.routes.js";
 dotenv.config();
 
 const PORT = process.env.PORT;
-
 connectToDB();
 
 const app = express();
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,18 +28,20 @@ const corsOptions = {
     }
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "content-type", "contenttype"], // ✅ extra added
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+  ],
   credentials: true,
 };
 
-app.use(cors(corsOptions));
+
 
 app.use("/api/v1", userRoute);
 
 app.get("/", (req, res) => {
   res.send("Backend is running....");
 });
-
 
 app.listen(PORT || 5000, () => {
   console.log(`Server listening at port ${PORT}`);
