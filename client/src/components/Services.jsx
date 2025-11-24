@@ -32,7 +32,7 @@ const Services = () => {
         {servicesList.map((service) => (
           <Card className={"group cursor-pointer border-2 border-transparent hover:border-[#F57517] transition-colors duration-200 shadow-lg hover:shadow-2xl"} key={service.key}>
             <Link
-              to={service.href}
+              // to={service.href}
               key={service.key}
               className=" rounded-2xl hover:border-[#F57517] flex flex-col items-center text-center transition-colors duration-200"
             >

@@ -23,12 +23,14 @@
     "password": "ਪਾਸਵਰਡ",
     "message": "ਤੁਹਾਡਾ ਸੁਨੇਹਾ",
     "otp": "ਓਟੀਪੀ ਦਰਜ ਕਰੋ",
+    "aadhar": "ਆਧਾਰ ਨੰਬਰ",
     "enterOtp": "6 ਅੰਕਾਂ ਦਾ ਓਟੀਪੀ ਦਰਜ ਕਰੋ",
     "enterName": "ਆਪਣਾ ਪੂਰਾ ਨਾਮ ਦਰਜ ਕਰੋ",
     "enterEmail": "ਆਪਣਾ ਈਮੇਲ ਦਰਜ ਕਰੋ",
     "enterPhone": "ਆਪਣਾ ਫ਼ੋਨ ਦਰਜ ਕਰੋ",
     "enterPassword": "ਆਪਣਾ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
     "confirmPassword": "ਆਪਣਾ ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ ਕਰੋ",
+    "enterAadhar": "ਆਧਾਰ ਨੰਬਰ ਦਰਜ ਕਰੋ",
     "enterQuery": "ਆਪਣੀ ਪੁੱਛਗਿੱਛ ਦਰਜ ਕਰੋ",
     "enterMessage": "ਇੱਥੇ ਆਪਣਾ ਸੁਨੇਹਾ ਲਿਖੋ"
   },
@@ -55,7 +57,9 @@
     "events": "ਕਾਰਜਕ੍ਰਮ",
     "membership": "ਸਦੱਸਤਾ",
     "sportsClub": "ਖੇਡ ਕਲੱਬ",
-    "gurmukhi": "ਗੁਰਮੁਖੀ"
+    "lifeline": "ਜੀਵਨ ਰੇਖਾ",
+    "gurmukhi": "ਗੁਰਮੁਖੀ",
+    "dashboard": "ਡੈਸ਼ਬੋਰਡ"
   },
 
   "homeSection": {

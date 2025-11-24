@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Sidebar from "./SideBar";
@@ -11,8 +10,7 @@ import { useSelector } from "react-redux";
 function Header() {
   const { t } = useTranslation();
 
-  const state = useSelector((state)=>state.userReducer)
-  console.log(state.isAuthorized);
+  const {isAuthorized} = useSelector((state)=>state.auth)
 
   return (
     <>
@@ -37,7 +35,7 @@ function Header() {
               <ThemeToggle />
             </div>
 
-            {state.isAuthorized ? (
+            {isAuthorized ? (
               <Link to={"/dashboard"} className="rounded-full cursor-pointer">
                 {/* Icon should also adapt to theme */}
                 <CircleUserRound

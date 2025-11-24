@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
       minlength: 3,
-      maxlength: 50
+      maxlength: 50,
     },
     phone: {
       type: String,
@@ -59,6 +59,18 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+userSchema.methods.toSafeObject = function () {
+  const safeUser = {
+    _id: this._id,
+    fullName: this.fullName,
+    email: this.email,
+    phone: this.phone,
+    aadhar: this.aadhar,
+    isVerified: this.isVerified,
+  };
+  return safeUser;
+};
 
 const User = mongoose.model("User", userSchema);
 

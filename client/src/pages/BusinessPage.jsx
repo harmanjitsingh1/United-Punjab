@@ -33,7 +33,7 @@ export default function BusinessPage() {
           {t("business.details")}
         </p>
         <Link
-          to="/business/eternal"
+          // to="/business/eternal"
           className="mt-6 px-6 py-2 rounded-full bg-[#F57517] text-white 
                      font-semibold hover:bg-[#ff8533] transition-colors"
         >

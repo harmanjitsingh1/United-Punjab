@@ -23,16 +23,18 @@
     "password": "Password",
     "message": "Your Message",
     "otp": "Enter OTP",
+    "aadhar": "Aadhar Number",
     "enterOtp": "Enter 6-digit OTP",
     "enterName": "Enter your full name",
     "enterEmail": "Enter your email",
     "enterPhone": "Enter your phone",
     "enterPassword": "Enter your password",
     "confirmPassword": "Confirm your password",
+    "enterAadhar": "Enter Aadhar Number",
     "enterQuery": "Enter your Query",
     "enterMessage": "Type your message here"
   },
-  
+
   "verifyOtp": "Verify OTP",
   "didntReceiveOtp": "Didn’t receive the OTP?",
   "resendOtp": "Resend",
@@ -40,7 +42,7 @@
     "otpRequired": "OTP is required.",
     "otpInvalid": "OTP must be a 6-digit code."
   },
-  
+
   "nav": {
     "home": "Home",
     "login": "Login",
@@ -55,7 +57,9 @@
     "events": "Events",
     "membership": "Membership",
     "sportsClub": "Sports Club",
-    "gurmukhi": "Gurmukhi"
+    "lifeline": "Lifeline",
+    "gurmukhi": "Gurmukhi",
+    "dashboard": "Dashboard"
   },
 
   "homeSection": {

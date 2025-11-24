@@ -2,15 +2,16 @@ import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { House, Loader2Icon } from "lucide-react";
+import { House, Loader2Icon, Eye, EyeOff } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { signupUserThunk } from "@/store/user.thunk";
+import { signupUserThunk } from "@/store/thunks/user.thunk";
 import { useDispatch, useSelector } from "react-redux";
 
 function SignupPage() {
   const [step, setStep] = useState(1);
-  const state = useSelector((state) => state.userReducer);
+  const [showPassword, setShowPassword] = useState(false);
+  const { buttonLoading } = useSelector((state) => state.auth);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -81,20 +82,20 @@ function SignupPage() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Run validation for all fields
     Object.entries(formData).forEach(([name, value]) =>
       validateField(name, value)
     );
 
-    // Check if any errors remain
     const hasErrors = Object.values(errors).some((err) => err !== "");
     if (hasErrors) return;
 
-    console.log(formData);
     const data = await dispatch(signupUserThunk(formData));
-    
+
     if (data?.payload?.success) {
-        navigate("/verify-otp");
+      toast.success(data?.payload?.response?.message || data?.payload?.message);
+      navigate("/verify-otp");
+    } else {
+      toast.error(data?.payload?.response?.message || data?.payload?.message);
     }
   };
 
@@ -102,11 +103,8 @@ function SignupPage() {
     Object.values(formData).every((val) => val.trim() !== "") &&
     Object.values(errors).every((err) => !err);
 
-  // if (!allValid) return;
-
   return (
     <div className="flex items-center justify-center min-h-screen w-full">
-      {/* Top-left nav */}
       <div className="flex items-center gap-2 md:gap-4 fixed top-4 left-4">
         <Link to={"/"}>
           <button className="bg-popover cursor-pointer backdrop-blur-xl p-3 rounded-full shadow-lg focus:outline-none">
@@ -115,7 +113,6 @@ function SignupPage() {
         </Link>
       </div>
 
-      {/* Main form */}
       <div className="p-4 w-full md:w-[450px]">
         <div>
           <h2 className="text-3xl font-bold text-center mt-2 mb-6 text-primary">
@@ -132,6 +129,7 @@ function SignupPage() {
             autoComplete="on"
           >
             {/* Name */}
+            {/* {step === 1 && ( */}
             <div className="w-full">
               <Label className="text-md block mb-1">{t("inputs.name")}</Label>
               <Input
@@ -142,14 +140,18 @@ function SignupPage() {
                 type="text"
                 autoComplete="name"
                 placeholder={`${t("inputs.enterName")}`}
-                className="bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2"
+                className={`bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2 ${
+                  errors.fullName ? "border-red-500" : "border-transparent"
+                } focus:border-2 !focus-visible:outline-none focus-visible:ring-0`}
               />
               {errors.fullName && (
                 <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
               )}
             </div>
+            {/* )} */}
 
             {/* Phone */}
+            {/* {step === 2 && ( */}
             <div className="w-full">
               <Label className="text-md block mb-1">{t("inputs.phone")}</Label>
               <Input
@@ -160,14 +162,18 @@ function SignupPage() {
                 type="phone"
                 autoComplete="phone"
                 placeholder={`${t("inputs.enterPhone")}`}
-                className="bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2"
+                className={`bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2 ${
+                  errors.phone ? "border-red-500" : "border-transparent"
+                } focus:border-2 !focus-visible:outline-none focus-visible:ring-0`}
               />
               {errors.phone && (
                 <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
               )}
             </div>
+            {/* )} */}
 
             {/* Email */}
+            {/* {step === 3 && ( */}
             <div className="w-full">
               <Label className="text-md block mb-1">{t("inputs.email")}</Label>
               <Input
@@ -178,14 +184,18 @@ function SignupPage() {
                 type="email"
                 autoComplete="email"
                 placeholder={`${t("inputs.enterEmail")}`}
-                className="bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2"
+                className={`bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2 ${
+                  errors.email ? "border-red-500" : "border-transparent"
+                } focus:border-2 !focus-visible:outline-none focus-visible:ring-0`}
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">{errors.email}</p>
               )}
             </div>
+            {/* )} */}
 
             {/* Aadhar */}
+            {/* {step === 4 && ( */}
             <div className="w-full">
               <Label className="text-md block mb-1">{t("inputs.aadhar")}</Label>
               <Input
@@ -196,71 +206,91 @@ function SignupPage() {
                 type="aadhar"
                 autoComplete="aadhar"
                 placeholder={`${t("inputs.enterAadhar")} ` || "Aadhar Number"}
-                className="bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2"
+                className={`bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2 ${
+                  errors.aadhar ? "border-red-500" : "border-transparent"
+                } focus:border-2 !focus-visible:outline-none focus-visible:ring-0`}
               />
               {errors.aadhar && (
                 <p className="text-red-500 text-sm mt-1">{errors.aadhar}</p>
               )}
             </div>
+            {/* )} */}
 
             {/* Password */}
-            <div className="w-full">
-              <Label className="text-md block mb-1">
-                {t("inputs.password")}
-              </Label>
-              <Input
-                value={formData.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                placeholder={`${t("inputs.enterPassword")}`}
-                className="bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-              )}
-            </div>
+            {/* {step === 5 && ( */}
+            <>
+              <div className="w-full">
+                <Label className="text-md block mb-1">
+                  {t("inputs.password")}
+                </Label>
+                <Input
+                  value={formData.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="password"
+                  type="password"
+                  autoComplete="new-password"
+                  placeholder={`${t("inputs.enterPassword")}`}
+                  className={`bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2 ${
+                    errors.password ? "border-red-500" : "border-transparent"
+                  } focus:border-2 !focus-visible:outline-none focus-visible:ring-0`}
+                />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+                )}
+              </div>
+              {/* Confirm Password */}
+              <div className="w-full relative">
+                <Label className="text-md block mb-1">
+                  {t("inputs.confirmPassword")}
+                </Label>
+                <Input
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  name="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder={`${t("inputs.confirmPassword")}`}
+                  className={`bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2 ${
+                    errors.confirmPassword
+                      ? "border-red-500"
+                      : "border-transparent"
+                  } focus:border-2 !focus-visible:outline-none focus-visible:ring-0`}
+                />
+                {formData.confirmPassword && (
+                  <span
+                    className="absolute right-3 top-[35px] flex items-center justify-center h-[30%] aspect-square font-semibold cursor-pointer select-none"
+                    onClick={() => setShowPassword((s) => !s)}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </span>
+                )}
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.confirmPassword}
+                  </p>
+                )}
+              </div>
 
-            {/* Confirm Password */}
-            <div className="w-full">
-              <Label className="text-md block mb-1">
-                {t("inputs.confirmPassword")}
-              </Label>
-              <Input
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                name="confirmPassword"
-                type="password"
-                autoComplete="new-password"
-                placeholder={`${t("inputs.confirmPassword")}`}
-                className="bg-input w-full !px-4 !py-5 !text-lg rounded-lg border-2"
-              />
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.confirmPassword}
-                </p>
-              )}
-            </div>
-
-            <Button
-              type="submit"
-              disabled={!isFormValid || state.buttonLoading}
-              className={`text-lg w-full py-6 rounded-lg font-semibold transition-transform shadow-lg cursor-pointer 
+              <Button
+                type="submit"
+                disabled={!isFormValid || buttonLoading}
+                className={`text-lg w-full py-6 rounded-lg font-semibold transition-transform shadow-lg cursor-pointer 
                 ${
-                  isFormValid || state.buttonLoading
+                  isFormValid || buttonLoading
                     ? "bg-gradient-to-r from-[#F57517] to-orange-500 text-white hover:scale-105"
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
-            >
-              {state.buttonLoading ? (
-                <Loader2Icon className={"animate-spin"} />
-              ) : (
-                t("nav.signup")
-              )}
-            </Button>
+              >
+                {buttonLoading ? (
+                  <Loader2Icon className={"animate-spin"} />
+                ) : (
+                  t("nav.signup")
+                )}
+              </Button>
+            </>
+            {/* )} */}
           </form>
 
           <p className="text-center mt-6">
@@ -287,7 +317,7 @@ export default SignupPage;
 // import { signupUserThunk } from "@/store/user.thunk";
 
 // export default function SignupWizard() {
-//   const state = useSelector((state) => state.userReducer);
+//   const state = useSelector((state) => userReducer);
 //   const dispatch = useDispatch();
 //   const navigate = useNavigate();
 
@@ -506,10 +536,10 @@ export default SignupPage;
 //             {step === 5 && (
 //               <Button
 //                 type="submit"
-//                 disabled={state.buttonLoading}
+//                 disabled={buttonLoading}
 //                 className="ml-auto bg-primary text-white px-6"
 //               >
-//                 {state.buttonLoading ? (
+//                 {buttonLoading ? (
 //                   <Loader2 className="animate-spin" />
 //                 ) : (
 //                   "Submit"

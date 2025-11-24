@@ -23,12 +23,14 @@
     "password": "पासवर्ड",
     "message": "आपका संदेश",
     "otp": "ओटीपी दर्ज करें",
+    "aadhar": "आधार नंबर",
     "enterOtp": "6 अंकों का ओटीपी दर्ज करें",
     "enterName": "अपना पूरा नाम दर्ज करें",
     "enterEmail": "अपना ईमेल दर्ज करें",
     "enterPhone": "अपना फ़ोन दर्ज करें",
     "enterPassword": "अपना पासवर्ड दर्ज करें",
     "confirmPassword": "अपना पासवर्ड पुष्टि करें",
+    "enterAadhar": "आधार नंबर दर्ज करें",
     "enterQuery": "अपना प्रश्न दर्ज करें",
     "enterMessage": "यहाँ अपना संदेश लिखें"
   },
@@ -55,7 +57,9 @@
     "events": "कार्यक्रम",
     "membership": "सदस्यता",
     "sportsClub": "खेल क्लब",
-    "gurmukhi": "गुरमुखी"
+    "lifeline": "जीवन रेखा",
+    "gurmukhi": "गुरमुखी",
+    "dashboard": "डैशबोर्ड"
   },
 
   "homeSection": {

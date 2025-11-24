@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { loginUserThunk } from "@/store/user.thunk";
-import { House, Loader2Icon } from "lucide-react";
+import { loginUserThunk } from "@/store/thunks/user.thunk";
+import { House, Loader2Icon, Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 function LoginPage() {
-  const state = useSelector((state) => state.userReducer);
-  // console.log(state);
+  const { buttonLoading } = useSelector((state) => state.auth);
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -29,16 +29,13 @@ function LoginPage() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  // simple validators
   const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
   const isValidPassword = (pwd) => pwd && pwd.length >= 8;
 
-  // explicit handlers (more reliable with custom Input components)
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setFormData((p) => ({ ...p, email: value }));
 
-    // live clear if valid
     if (value === "" || isValidEmail(value)) {
       setErrors((p) => ({ ...p, email: "" }));
     }
@@ -53,7 +50,6 @@ function LoginPage() {
     }
   };
 
-  // onBlur validators for UX
   const handleEmailBlur = () => {
     if (!formData.email) {
       setErrors((p) => ({ ...p, email: "Email is required" }));
@@ -67,11 +63,6 @@ function LoginPage() {
   const handlePasswordBlur = () => {
     if (!formData.password) {
       setErrors((p) => ({ ...p, password: "Password is required" }));
-    } else if (!isValidPassword(formData.password)) {
-      setErrors((p) => ({
-        ...p,
-        password: "Password must be at least 8 characters",
-      }));
     } else {
       setErrors((p) => ({ ...p, password: "" }));
     }
@@ -117,14 +108,15 @@ function LoginPage() {
       validateField(name, value)
     );
 
-    // Check if any errors remain
     const hasErrors = Object.values(errors).some((err) => err !== "");
     if (hasErrors) return;
 
-    // dispatch login thunk
     const data = await dispatch(loginUserThunk(formData));
-    if (data?.payload?.success){
-      navigate("/")
+    if (data?.payload?.success) {
+      toast.success(data?.payload?.response?.message || data?.payload?.message);
+        navigate("/");
+    } else {
+      toast.error(data?.payload?.response?.message || data?.payload?.message);
     }
   };
 
@@ -148,7 +140,7 @@ function LoginPage() {
           </h2>
 
           <form
-            className="space-y-4 w-full"
+            className="space-y-4 w-full flex flex-col"
             onSubmit={handleLogin}
             noValidate
             autoComplete="on"
@@ -204,27 +196,34 @@ function LoginPage() {
                 )}
               </div>
 
-              {formData.password ? (
+              {formData.password && (
                 <span
-                  className="absolute right-3 font-semibold cursor-pointer select-none"
+                  className="absolute right-3 top-[35px] flex items-center justify-center h-[40%] aspect-square font-semibold cursor-pointer select-none"
                   onClick={() => setShowPassword((s) => !s)}
                 >
-                  {showPassword ? "Hide" : "Show"}
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </span>
-              ) : null}
+              )}
             </div>
+
+            <Link
+              to="/reset-password"
+              className="text-sm font-medium text-primary underline self-end px-2"
+            >
+              Forgot Password?
+            </Link>
 
             <Button
               type="submit"
-              disabled={!isFormValid || state.buttonLoading}
-              className={`text-lg w-full py-6 rounded-lg font-semibold transition-transform shadow-lg cursor-pointer 
+              disabled={!isFormValid || buttonLoading}
+              className={`text-lg w-full mt-2 py-6 rounded-lg font-semibold transition-transform shadow-lg cursor-pointer 
                 ${
-                  isFormValid || state.buttonLoading
+                  isFormValid || buttonLoading
                     ? "bg-gradient-to-r from-[#F57517] to-orange-500 text-white hover:scale-105"
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
             >
-              {state.buttonLoading ? (
+              {buttonLoading ? (
                 <Loader2Icon className={"animate-spin"} />
               ) : (
                 t("nav.login")

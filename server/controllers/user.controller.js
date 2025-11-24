@@ -1,30 +1,27 @@
 import User from "../models/user.model.js";
+import Query from "../models/query.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { sendVerificationCode } from "../utils/sendVerificationCode.js";
+import { sendEmail } from "../services/email.services.js";
+import { generateToken } from "../utils/generateToken.js";
 
 export const userLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-
     if (!email || !password) {
       return res.status(400).json({
         success: false,
         message: "All fields are required.",
       });
     }
-
     const user = await User.findOne({ email });
-
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "User not found.",
+        message: "Invalid username or password.",
       });
     }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-
+    const isMatch = await bcrypt.compare(password, user?.password);
     if (!isMatch) {
       return res.status(401).json({
         success: false,
@@ -32,34 +29,42 @@ export const userLogin = async (req, res) => {
       });
     }
 
-    if (!user.isVerified) {
-      return res.status(401).json({
-        success: false,
-        message: "Please verify your email before logging in.",
-      });
+    const token = generateToken(user?._id);
+
+    if (!user?.isVerified) {
+      return res
+        .status(200)
+        .cookie("token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+          partitioned: true,
+          path: "/",
+          maxAge: 7 * 24 * 60 * 60 * 1000,
+        })
+        .json({
+          success: true,
+          message: "Please verify your email before logging in.",
+          token,
+          user: user.toSafeObject(),
+        });
     }
 
-    const tokenData = {
-      _id: user?._id,
-    };
-    const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRATION_TIME,
-    });
-
-    res
+    return res
       .status(200)
       .cookie("token", token, {
         httpOnly: true,
         secure: true,
         sameSite: "none",
         partitioned: true,
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in ms
+        path: "/",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({
         success: true,
         message: "Login success.",
         token,
-        user,
+        user: user.toSafeObject(),
       });
   } catch (error) {
     console.error(error);
@@ -135,7 +140,12 @@ export const userSignup = async (req, res) => {
 
     const hashedOTP = await bcrypt.hash(OTP.toString(), 10);
 
-    await sendVerificationCode(email, OTP);
+    await sendEmail(
+      email,
+      "Verify Your Email - United Punjab",
+      "accountVerificationCode",
+      { OTP }
+    );
 
     const hashPassword = await bcrypt.hash(password, 10);
 
@@ -151,24 +161,44 @@ export const userSignup = async (req, res) => {
       otpAttempts: 1,
     });
 
-    // Remove sensitive data before sending response
-    const {
-      password: _,
-      verificationCode,
-      otpExpiresAt,
-      ...safeUser
-    } = newUser.toObject();
-
     res.status(201).json({
       success: true,
       message: "Signup successful. Verification code sent.",
-      user: safeUser,
+      user: user.toSafeObject(),
     });
   } catch (error) {
     console.error("Signup Error:", error);
     res.status(500).json({
       success: false,
       message: "Something went wrong. Please try again later.",
+    });
+  }
+};
+
+export const userLogout = async (req, res) => {
+  try {
+    // await Session.findOneAndUpdate(
+    //   { token: req.cookies?.token },
+    //   { valid: false }
+    // );
+    res
+      .clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+        partitioned: true,
+        path: "/",
+      })
+      .status(200)
+      .json({
+        success: true,
+        message: "Logged out successfully.",
+      });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message:
+        error?.message || "Something went wrong. Please try again later.",
     });
   }
 };
@@ -223,8 +253,6 @@ export const userVerification = async (req, res) => {
       expiresIn: process.env.JWT_EXPIRATION_TIME,
     });
 
-    const { password: _, otpExpiresAt, ...safeUser } = user.toObject();
-
     res
       .status(200)
       .cookie("token", token, {
@@ -232,13 +260,13 @@ export const userVerification = async (req, res) => {
         secure: true,
         sameSite: "none",
         partitioned: true,
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in ms
+        maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json({
         success: true,
         message: "User verified and logged in successfully.",
         token,
-        user: safeUser,
+        user: user.toSafeObject(),
       });
   } catch (error) {
     console.error(error.message);
@@ -287,7 +315,13 @@ export const resendOTP = async (req, res) => {
     user.otpAttempts = user.otpAttempts += 1;
 
     await user.save();
-    await sendVerificationCode(user.email, otp);
+
+    await sendEmail(
+      user.email,
+      "Verify Your Email - United Punjab",
+      "accountVerificationCode",
+      { otp }
+    );
 
     res.status(200).json({
       success: true,
@@ -295,5 +329,158 @@ export const resendOTP = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ message: "Resend failed", error: err.message });
+  }
+};
+
+export const getMe = async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    res.json({ success: true, user });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+export const sendResetPassOtp = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Email is required." });
+    }
+    const user = await User.findOne({
+      email,
+    }).select("-password");
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found." });
+    }
+    if (user.otpExpiresAt > Date.now()) {
+      return res.status(200).json({
+        success: true,
+        message: "OTP has already sent to you email.",
+      });
+    }
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    const hashedOtp = await bcrypt.hash(String(otp), 10);
+
+    user.verificationCode = hashedOtp;
+    user.otpExpiresAt = Date.now() + 10 * 60 * 1000;
+    user.lastOtpSentAt = Date.now();
+
+    await user.save();
+
+    await sendEmail(
+      user?.email,
+      "Reset Your Password - United Pujnab",
+      "resetPasswordCode",
+      {
+        username: user?.fullName,
+        otp,
+      }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "OTP has been sent to your email address.",
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: err.message || "Server error" });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, otp, password } = req.body;
+
+    if (!email || !otp || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid request!." });
+    }
+
+    const user = await User.findOne({
+      email,
+    });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found." });
+    }
+
+    if (user.resetPasswordExpires < Date.now()) {
+      return res.status(401).json({
+        success: false,
+        message: "OTP expired. Please request a new one.",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(otp, user.resetPasswordOtp);
+
+    if (!isMatch) {
+      return res.status(401).json({ success: false, message: "Invalid OTP." });
+    }
+
+    if (await bcrypt.compare(password, user.password)) {
+      return res.status(500).json({
+        success: false,
+        message: "New password must be different from old one",
+      });
+    }
+
+    const hashPassword = await bcrypt.hash(password, 10);
+    user.password = hashPassword;
+    user.resetPasswordOtp = null;
+    user.resetPasswordExpires = null;
+    await user.save();
+
+    await Session.updateMany({ userId: user._id }, { valid: false });
+
+    return res.status(200).json({
+      success: true,
+      message: "Password has been changed.",
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: err.message || "Server error" });
+  }
+};
+
+export const contactUs = async (req, res) => {
+  try {
+    const { name, email, phone, message } = req.body;
+
+    if (!email || !name || !phone || !message) {
+      return res.status(400).json({
+        success: false,
+        message: "All fields are required.",
+      });
+    }
+
+    let newQuery = await Query.create({
+      name,
+      email,
+      phone,
+      message,
+      user: req?.user?._id,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Your query has been recorded.",
+      newQuery,
+    });
+  } catch (error) {
+    console.error(error);
   }
 };

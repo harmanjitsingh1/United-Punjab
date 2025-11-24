@@ -35,7 +35,7 @@ export default function Sidebar() {
         >
           <aside
             className="w-70 h-screen absolute top-0 left-0 z-50 bg-background text-zinc-100 flex flex-col"
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
             <div className="px-4 py-4 border-b border-border flex items-center justify-between">
@@ -43,14 +43,17 @@ export default function Sidebar() {
                 {t("brandName")}
               </h2>
 
-              <div className="text-foreground cursor-pointer" onClick={toggleSidebar}>
+              <div
+                className="text-foreground cursor-pointer"
+                onClick={toggleSidebar}
+              >
                 <CircleX />
               </div>
             </div>
 
             {/* Navigation */}
-            <nav className="overflow-auto no-scrollbar">
-              <ul className="space-y-1 mt-3 overflow-auto mb-30">
+            <nav className="overflow-auto no-scrollbar ">
+              <ul className="space-y-1 mt-3 overflow-auto mb-5">
                 {navItems.map((item, index) => (
                   <li key={index}>
                     <NavLink
@@ -69,11 +72,14 @@ export default function Sidebar() {
                   </li>
                 ))}
               </ul>
+              <div
+                className="py-4 px-5 border-y border-border flex items-center gap-4"
+                onClick={toggleSidebar}
+              >
+                <p className="text-foreground">Toggle Theme</p>
+                <ThemeToggle />
+              </div>
             </nav>
-
-            <div className="mt-auto p-4 border-t border-border" onClick={toggleSidebar} >
-              <ThemeToggle />
-            </div>
           </aside>
         </div>
       )}

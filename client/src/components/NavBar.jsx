@@ -12,6 +12,7 @@ export const getNavItems = (t) => [
   { label: t("nav.scholarships"), href: "/scholarships" },
   { label: t("nav.business"), href: "/business" },
   { label: t("nav.sportsClub"), href: "/sports-club" },
+  { label: t("nav.lifeline"), href: "/lifeline" },
   { label: t("nav.gurmukhi"), href: "/gurmukhi" },
   { label: t("nav.contact"), href: "/contact" },
 ];
